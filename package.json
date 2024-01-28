@@ -1,0 +1,66 @@
+{
+  "name": "@jamesmillerblog/webxr",
+  "version": "0.0.2",
+  "description": "",
+  "main": "index.js",
+  "workspaces": [
+    "src/client",
+    "src/shared",
+    "src/server"
+  ],
+  "dependencies": {
+    "@pulumi/aws": "^6.13.1",
+    "@pulumi/pulumi": "^3.95.0",
+    "bufferutil": "^4.0.8",
+    "ts-node": "^10.9.1",
+    "utf-8-validate": "^6.0.3"
+  },
+  "scripts": {
+    "dev": "yarn workspace @webxr/client start:dev & yarn workspace @webxr/server start:dev",
+    "setup": "ts-node ./scripts/setup dev localhost-project-init",
+    "deploy:project": "ts-node ./scripts/setup",
+    "deploy:all": "yarn deploy:shared && yarn deploy:apps",
+    "deploy:apps": "yarn deploy:client && yarn deploy:server",
+    "deploy:shared": "yarn workspace @webxr/shared pulumi:up",
+    "deploy:client": "yarn workspace @webxr/client deploy",
+    "deploy:server": "yarn workspace @webxr/server deploy",
+    "destroy:all": "yarn destroy:client && yarn destroy:server && yarn destroy:shared",
+    "destroy:project": "ts-node ./scripts/destroy",
+    "destroy:apps": "yarn destroy:client && yarn destroy:server",
+    "destroy:shared": "yarn workspace @webxr/shared pulumi:down",
+    "destroy:client": "yarn workspace @webxr/client destroy",
+    "destroy:server": "yarn workspace @webxr/server destroy",
+    "retrieveEnvs": "ts-node ./scripts/env/retrieveEnvs",
+    "cd:initEnvCli": "ts-node ./scripts/init/cliParams",
+    "cd:s3StateBucketsSetup": "ts-node ./scripts/aws/s3StateBucketsSetup",
+    "cd:initPulumi": "ts-node ./scripts/pulumi/initPulumi",
+    "cd:createSecrets": "ts-node ./scripts/aws/createSecrets",
+    "cd:generateEnvs": "ts-node ./scripts/env/generateEnvs",
+    "cd:s3StateBucketsDeletion": "ts-node ./scripts/aws/s3StateBucketsDeletion",
+    "cd:deleteSecrets": "ts-node ./scripts/aws/deleteSecrets",
+    "postinstall": "husky install",
+    "prepack": "pinst --disable",
+    "postpack": "pinst --enable",
+    "lint": "yarn workspace @webxr/client lint-and-fix && yarn workspace @webxr/server lint && yarn workspace @webxr/shared lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JamesMillerBlog/webxr.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "author": "James Miller",
+  "license": "ISC",
+  "devDependencies": {
+    "@commitlint/cli": "^18.4.3",
+    "@commitlint/config-conventional": "^18.4.3",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "husky": "^8.0.0",
+    "pinst": "^3.0.0",
+    "prettier": "^3.1.0",
+    "typescript": "^5.3.3"
+  },
+  "packageManager": "yarn@4.0.2"
+}

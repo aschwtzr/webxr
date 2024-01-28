@@ -1,0 +1,9 @@
+name: 'Deploy Server Resources'
+description: 'Deploy all server resources'
+
+runs:
+  using: 'composite'
+  steps:
+  - name: Deploy Server Infrastructure
+    shell: bash
+    run: yarn deploy:server

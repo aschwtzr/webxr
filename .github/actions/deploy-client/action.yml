@@ -1,0 +1,9 @@
+name: 'Deploy Client Resources'
+description: 'Deploy all client resources'
+
+runs:
+  using: 'composite'
+  steps:
+  - name: Deploy Client Infrastructure
+    shell: bash
+    run: yarn deploy:client

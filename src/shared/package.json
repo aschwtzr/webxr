@@ -1,0 +1,36 @@
+{
+    "name": "@webxr/shared",
+    "version": "0.0.2",
+    "private": true,
+    "devDependencies": {
+        "@types/node": "^16",
+        "@typescript-eslint/eslint-plugin": "^6.4.0",
+        "eslint": "^8.0.1",
+        "eslint-config-standard-with-typescript": "^40.0.0",
+        "eslint-plugin-import": "^2.25.2",
+        "eslint-plugin-n": "^15.0.0 || ^16.0.0 ",
+        "eslint-plugin-promise": "^6.0.0",
+        "typescript": "*"
+    },
+    "scripts": {
+        "pulumi:stack:init": "cd infrastructure && pulumi stack init",
+        "pulumi:stack:select": "cd infrastructure && pulumi stack select",
+        "pulumi:preview": "cd infrastructure && pulumi preview",
+        "pulumi:up": "cd infrastructure && pulumi up -y",
+        "pulumi:down": "cd infrastructure && pulumi down -y",
+        "pulumi:stack:rm": "cd infrastructure && pulumi stack rm",
+        "pulumi:whoami": "cd infrastructure && pulumi whoami",
+        "pulumi:local:up": "cd infrastructure && localstack start & pulumilocal up",
+        "pulumi:local:destroy": "cd infrastructure && localstack start & pulumilocal destroy && localstack stop",
+        "pulumi:login": "cd ../../ && ts-node ./scripts/pulumi/pulumiStackLogin.ts shared",
+        "lint": "eslint . --ext ts --fix"
+    },
+    "dependencies": {
+        "@pulumi/aws": "^6.13.1",
+        "@pulumi/pulumi": "^3.95.0",
+        "aws-sdk": "^2.1512.0",
+        "eslint-config-prettier": "^9.1.0",
+        "eslint-plugin-prettier": "^5.0.1",
+        "prettier": "^3.1.0"
+    }
+}
